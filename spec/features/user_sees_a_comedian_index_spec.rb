@@ -17,18 +17,14 @@ RSpec.describe 'Comedian Index' do
       expect(page).to have_content("Name: #{comic.name}")
       expect(page).to have_content("#{special.name}")
     end
-    it "sees a count of all specials for comedians" do
-      comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
-      special = Special.create(name: 'Hell Yes', comedian_id: 1)
-      special = Special.create(name: 'Damn Right', comedian_id: 1)
+    it 'sees an average age of all comedians' do
+      comic_one = Comedian.create(name: 'Mitch Hedberg', age: 48)
+      comic_two = Comedian.create(name: 'My Face', age: 52)
 
       visit '/comedians'
-
-      expect(page).to have_content("Name: #{comic.name}")
-      expect(page).to have_content("#{special.name}")
-      expect(page).to have_content(2)
+    
+      expect(page).to have_content(50)
     end
-  end
   # context 'visiting /comedians?age=46' do
   #   it 'sees all comedians age 46' do
   #     comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
@@ -42,4 +38,16 @@ RSpec.describe 'Comedian Index' do
   #     expect(page).to have_content('Mitch Hedberg')
   #   end
   # end
+    it "sees a count of all specials for comedians" do
+      comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
+      special = Special.create(name: 'Hell Yes', comedian_id: 1)
+      special = Special.create(name: 'Damn Right', comedian_id: 1)
+
+      visit '/comedians'
+
+      expect(page).to have_content("Name: #{comic.name}")
+      expect(page).to have_content("#{special.name}")
+      expect(page).to have_content(2)
+    end
+  end
 end
