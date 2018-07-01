@@ -22,22 +22,22 @@ RSpec.describe 'Comedian Index' do
       comic_two = Comedian.create(name: 'My Face', age: 52)
 
       visit '/comedians'
-    
+
       expect(page).to have_content(50)
     end
-  # context 'visiting /comedians?age=46' do
-  #   it 'sees all comedians age 46' do
-  #     comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
-  #     comic = Comedian.create(name: 'Tina Fey', age: 46)
-  #     comic = Comedian.create(name: 'Miss Chuckles', age: 46)
-  #
-  #     visit '/comedians?age=46'
-  #
-  #     expect(page).to have_content('Tina Fey')
-  #     expect(page).to have_content('Miss Chuckles')
-  #     expect(page).to have_content('Mitch Hedberg')
-  #   end
-  # end
+  context 'visiting /comedians?age=46' do
+    it 'sees all comedians age 46' do
+      comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
+      comic = Comedian.create(name: 'Tina Fey', age: 46)
+      comic = Comedian.create(name: 'Miss Chuckles', age: 46)
+
+      visit '/comedians?age=46'
+
+      expect(page).to have_content('Tina Fey')
+      expect(page).to have_content('Miss Chuckles')
+      expect(page).to_not have_content('Mitch Hedberg')
+    end
+  end
     it "sees a count of all specials for comedians" do
       comic = Comedian.create(name: 'Mitch Hedberg', age: 48)
       special = Special.create(name: 'Hell Yes', comedian_id: 1)
